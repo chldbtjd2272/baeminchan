@@ -5,6 +5,7 @@ function $(selector) {
 document.addEventListener("DOMContentLoaded", () => {
     initEvents(".join_form_box .btn_area .btn",registerUserHandler);
     initEvents("#login_btn",loginHandler);
+    initEvents("#kakao_rest",kakaoLoginHandler);
 })
 
 function initEvents(btnSelector,handler) {
@@ -16,6 +17,7 @@ function initEvents(btnSelector,handler) {
 function fetchManager({ url, method, body, headers,callback}) {
     fetch(url, {method,body,headers,credentials: "same-origin"})
         .then((response) => {
+        console.log(response);
         callback(response);
     })
 }
@@ -56,6 +58,15 @@ function loginHandler(evt) {
     })
 }
 
+
+
+function kakaoLoginHandler(evt){
+    evt.preventDefault();
+    window.location.href='https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri=http://localhost:8080/api/users/kakao_auth    &response_type=code'
+  
+}
+
+
 function joinCallback(response){
     clearJoinError();
     if(response.status === 201){
@@ -88,6 +99,7 @@ function loginCallback(response){
     }
     alert("로그인에 실패하였습니다.");
 }
+
 
 function goNext(evt){
 

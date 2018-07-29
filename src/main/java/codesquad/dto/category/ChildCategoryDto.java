@@ -8,4 +8,5 @@ import lombok.Getter;
 public class ChildCategoryDto {
     private Long parentId;
     private String childTitle;
+    public ChildCategoryDto(){};
 }

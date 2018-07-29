@@ -19,13 +19,15 @@ public class Category {
     @Column(nullable = false)
     private String title;
 
-    @ManyToOne()
-    @JoinColumn(name = "parentId")
-    private Category parent;
+//    @ManyToOne()
+//    @JoinColumn(name = "parentId")
+//    private Category parent;
 
-    @OneToMany()
-    @JoinColumn(name = "parentId")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "parentId" )
     private List<Category> children = new ArrayList<>();
+
+    public Category(){};
 
     public Category(String title) {
         this.title = title;
