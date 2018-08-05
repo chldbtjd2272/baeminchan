@@ -10,7 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@Profile({"dev","local"})
+@Profile({"dev"})
 public class SwaggerConfig {
 
     @Bean
