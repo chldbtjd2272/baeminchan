@@ -39,7 +39,7 @@ function makeHTMLMenu(product) {
   const price = Number(product.price).toLocaleString("en");
   const html = `
                      <li>
-                                <a class="thumbnail-box" href="#">
+                                <a class="thumbnail-box" href="/products/${product.id}">
                                     <div class="thumbnail">
                                         <img src="${product.imgUrl}">
                                     </div>
@@ -47,7 +47,7 @@ function makeHTMLMenu(product) {
                                     <dl class="content">
                                         <dt class="title">${product.title}</dt>
                                         <dd class="desc">${
-                                          product.discribe
+                                          product.description
                                         }</dd>
                                         <dd class="price-wrapper">
                                             <span class="final-price">

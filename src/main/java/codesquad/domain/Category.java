@@ -1,6 +1,7 @@
 package codesquad.domain;
 
 import codesquad.dto.CategoryDTO;
+import codesquad.dto.ProductDetailDTO;
 import codesquad.dto.UpdateCategoryDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,6 +17,9 @@ import java.util.stream.Collectors;
 @Getter
 @Entity
 public class Category {
+
+    public final static String ROOT = "root";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
@@ -88,6 +92,14 @@ public class Category {
         categoryDTO.setId(this.id);
         categoryDTO.setChildren(this.children.stream().map(child -> child.toDTO()).collect(Collectors.toList()));
         return categoryDTO;
+    }
+
+
+    public void getRootTitle(List<String> categoriesTitle){
+        if(!title.equals(ROOT)) {
+            categoriesTitle.add(this.title);
+            parent.getRootTitle(categoriesTitle);
+        }
     }
 
 }

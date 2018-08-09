@@ -1,12 +1,14 @@
 package codesquad.web;
 
 import codesquad.domain.Product;
+import codesquad.dto.ProductDetailDTO;
 import codesquad.service.ProductService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +24,11 @@ public class ApiProductController {
     @GetMapping("/titles")
     public ResponseEntity<List<Product>> findAllTitles() {
         return new ResponseEntity<List<Product>>(productService.findAllTitles(), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "모든 제품의 이름 조회", notes = "제품 검색 자동완성 ui 구현을 위해 호출합니다.")
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDetailDTO> findProductById(@PathVariable Long id) {
+        return new ResponseEntity<ProductDetailDTO>(productService.findById(id), HttpStatus.OK);
     }
 }
